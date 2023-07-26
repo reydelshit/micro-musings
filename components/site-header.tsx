@@ -31,9 +31,11 @@ export function SiteHeader() {
 
           {showLogout && (
             <div className="flex items-center justify-center absolute bottom-[-6rem] right-6 bg-white w-[8rem] border-2 h-full">
-              <span>{session ? <SignOut /> : <Login />}</span>
+              <span>{session && <SignOut />}</span>
             </div>
           )}
+
+          {!session?.user && <Login />}
         </div>
       </nav>
     </header>
