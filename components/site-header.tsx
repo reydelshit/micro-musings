@@ -12,8 +12,8 @@ export function SiteHeader() {
 
   return (
     <header className="w-full flex justify-center bg-gray-100 border-2">
-      <nav className="w-full flex items-center h-[7rem] py-4 px-10 justify-between ">
-        <div className="flex justify-between w-[20rem] font-bold">
+      <nav className="w-full flex items-center h-[7rem] py-4 px-10 md:px-1 justify-between ">
+        <div className="flex justify-between font-bold">
           <Link href="/">Micro Musings</Link>
         </div>
         <div className="relative flex justify-around w-[20rem] align-middle items-center font-bold ">
