@@ -30,8 +30,8 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex h-[90vh] items-center justify-center bg-gray-100 p-2 md:mt-6">
-      <div className="flex flex-col justify-center items-center w-[40rem] p-8 border-2 bg-white rounded-xl">
+    <div className="w-full min-h-screen bg-gray-100 flex justify-center items-center p-2">
+      <div className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md">
         <div className="text-center">
           <h1 className="font-bold text-4xl">Embrace your ideas!</h1>
           <p>let it out!</p>
