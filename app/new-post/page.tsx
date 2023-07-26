@@ -30,7 +30,7 @@ export default async function Page() {
   }
 
   return (
-    <div className="flex h-[90vh] items-center justify-center bg-gray-100">
+    <div className="flex h-[90vh] items-center justify-center bg-gray-100 p-2 md:mt-6">
       <div className="flex flex-col justify-center items-center w-[40rem] p-8 border-2 bg-white rounded-xl">
         <div className="text-center">
           <h1 className="font-bold text-4xl">Embrace your ideas!</h1>
