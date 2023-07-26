@@ -24,8 +24,8 @@ export default async function ReadMore({
   };
 
   return (
-    <main className="w-full min-h-screen bg-gray-100 flex justify-center items-center">
-      <div className="relative w-[90%] sm:w-[70%] lg:w-[40%] border-2 mt-[-8rem] px-5 bg-white rounded-md">
+    <main className="w-full min-h-screen bg-gray-100 flex justify-center items-center p-2">
+      <div className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md">
         <div className="flex h-[5rem] items-center justify-between">
           <div className="flex">
             <span className="mr-2">

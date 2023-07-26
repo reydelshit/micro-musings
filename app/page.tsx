@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <main className="w-full h-screen bg-gray-100">
       <div className="w-full flex-col h-full p-5 flex items-center bg-inherit">
-        <div className="w-[40%] py-8">
+        <div className="w-full lg:w-[40%] py-8 md:py-0">
           <h1 className="text-4xl font-bold">
             SEE WHAT MICROWERS ARE POSTING RIGHT NOW..
           </h1>
@@ -32,7 +32,7 @@ export default async function Home() {
         {posts.map((post) => {
           return (
             <div
-              className="h-[40%] w-[40%] border-2  mt-5 px-5 bg-white rounded-md"
+              className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
               key={post.id}
             >
               <div className="flex h-[5rem] items-center">
