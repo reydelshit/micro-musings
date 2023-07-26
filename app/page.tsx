@@ -9,6 +9,7 @@ export default async function Home() {
     include: {
       author: true,
     },
+    take: 100,
   });
 
   const formatDate = (date: Date) => {
