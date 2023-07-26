@@ -26,13 +26,13 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GOOGLE_ID!,
       clientSecret: process.env.GOOGLE_SECRET!,
 
-      profile(profile) {
-        return {
-          id: String(profile.id),
-          name: profile.login,
-          image: profile.avatar_url,
-        };
-      },
+      //   profile(profile) {
+      //     return {
+      //       id: String(profile.id),
+      //       name: profile.login,
+      //       image: profile.avatar_url,
+      //     };
+      //   },
     }),
   ],
   callbacks: {
