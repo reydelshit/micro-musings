@@ -1,9 +1,11 @@
+'use server';
+
 import Link from 'next/link';
 
 import { prisma } from '@/prisma/db';
+import { useState } from 'react';
 
-export default async function Home() {
-  // console.log(posts, 'from home component');
+export async function getServerSideProps() {
   const posts = await prisma.posts.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -13,6 +15,45 @@ export default async function Home() {
     },
     take: 100,
   });
+
+  return {
+    props: {
+      posts,
+    },
+  };
+}
+
+type Post = {
+  id: number;
+  title: string;
+  content: string;
+  category: string;
+  createdAt: Date;
+  updatedAt: Date;
+  author: {
+    id: number;
+    name: string;
+    email: string;
+    image: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+};
+
+type Props = {
+  posts: Post[];
+};
+
+export default async function Home({ posts }: Props) {
+  // const posts = await prisma.posts.findMany({
+  //   orderBy: {
+  //     createdAt: 'desc',
+  //   },
+  //   include: {
+  //     author: true,
+  //   },
+  //   take: 100,
+  // });
 
   const formatDate = (date: Date) => {
     const dateObj = new Date(date);
