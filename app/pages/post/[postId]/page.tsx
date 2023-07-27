@@ -1,5 +1,6 @@
 import { prisma } from '@/prisma/db';
-import { useSession } from 'next-auth/react';
+import { InputComment } from '@/components/input-comment';
+import { Vote } from '@/components/vote';
 
 export default async function ReadMore({
   params,
@@ -24,29 +25,31 @@ export default async function ReadMore({
   };
 
   return (
-    <main className="w-full min-h-screen bg-gray-100 flex justify-center items-center p-2">
+    <main className="w-full min-h-[90vh] bg-gray-100 flex justify-center items-center p-2 flex-col">
       <div className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md">
-        <div className="flex h-[5rem] items-center justify-between">
-          <div className="flex">
-            <span className="mr-2">
-              {post?.createdAt && formatDate(post?.createdAt)}
-            </span>
+        <div className="flex justify-between mb-2">
+          <div className="flex h-[5rem] items-center">
+            {post?.createdAt && formatDate(post?.createdAt)}
             <p>{post?.category}</p>
           </div>
-        </div>
 
+          <div className="flex items-center">
+            <img
+              className="w-[5rem] rounded-full mr-2"
+              src={post?.author?.image!}
+              alt={post?.author?.image!}
+            />
+            <span className="font-bold">{post?.author?.name!}</span>
+          </div>
+        </div>
         <h1 className="font-bold text-4xl">{post?.title}</h1>
         <p className="mt-5 text-md text-left">{post?.content}</p>
 
-        <div className="mt-10 mb-5 flex items-center">
-          <img
-            className="w-[5rem] rounded-full mr-2"
-            src={post?.author?.image!}
-            alt={post?.author?.image!}
-          />
-          <span className="font-bold">{post?.author?.name!}</span>
+        <div className="mt-5 mb-5 flex items-center">
+          <Vote postId={post?.id} />
         </div>
       </div>
+      <InputComment postId={params.postId} />
     </main>
   );
 }

@@ -3,46 +3,7 @@
 import Link from 'next/link';
 
 import { prisma } from '@/prisma/db';
-import { useState } from 'react';
-
-// export async function getServerSideProps() {
-//   const posts = await prisma.posts.findMany({
-//     orderBy: {
-//       createdAt: 'desc',
-//     },
-//     include: {
-//       author: true,
-//     },
-//     take: 100,
-//   });
-
-//   return {
-//     props: {
-//       posts,
-//     },
-//   };
-// }
-
-// type Post = {
-//   id: number;
-//   title: string;
-//   content: string;
-//   category: string;
-//   createdAt: Date;
-//   updatedAt: Date;
-//   author: {
-//     id: number;
-//     name: string;
-//     email: string;
-//     image: string;
-//     createdAt: Date;
-//     updatedAt: Date;
-//   };
-// };
-
-// type Props = {
-//   posts: Post[];
-// };
+import { Vote } from '@/components/vote';
 
 export default async function Home() {
   const posts = await prisma.posts.findMany({
@@ -77,12 +38,23 @@ export default async function Home() {
           posts.map((post) => {
             return (
               <div
-                className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
+                className="h-full lg:h-[40%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
                 key={post.id}
               >
-                <div className="flex h-[5rem] items-center">
-                  <span className="mr-2">{formatDate(post.createdAt)}</span>
-                  <p>{post.category}</p>
+                <div className="flex justify-between mb-2">
+                  <div className="flex h-[5rem] items-center">
+                    <span className="mr-2">{formatDate(post.createdAt)}</span>
+                    <p>{post.category}</p>
+                  </div>
+
+                  <div className="flex items-center">
+                    <img
+                      className="w-[5rem] rounded-full mr-2"
+                      src={post.author?.image!}
+                      alt={post.author?.image!}
+                    />
+                    <span className="font-bold">{post.author?.name!}</span>
+                  </div>
                 </div>
 
                 <Link
@@ -93,13 +65,16 @@ export default async function Home() {
                 </Link>
                 <p className="mt-5 text-lg">{post.content?.slice(0, 200)}...</p>
 
-                <div className="mt-10 flex items-center">
-                  <img
-                    className="w-[5rem] rounded-full mr-2"
-                    src={post.author?.image!}
-                    alt={post.author?.image!}
-                  />
-                  <span className="font-bold">{post.author?.name!}</span>
+                <div className="flex items-start flex-col mt-10">
+                  <div className="flex items-center mt-5  gap-5">
+                    <Vote postId={post.id} />
+                    <Link
+                      href={`/pages/post/${post.id}`}
+                      className="w-[5rem] text-orange-500"
+                    >
+                      Comment
+                    </Link>
+                  </div>
                 </div>
               </div>
             );

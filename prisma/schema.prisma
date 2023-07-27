@@ -11,6 +11,19 @@ datasource db {
 }
 
 
+// model Posts {
+//   id        Int      @id @default(autoincrement())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   published Boolean  @default(false)
+//   title     String
+//   content   String?
+//   category  String?
+//   author    User     @relation(fields: [authorId], references: [id])
+//   authorId  String
+// }
+
+
 model Posts {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
@@ -19,10 +32,26 @@ model Posts {
   title     String
   content   String?
   category  String?
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  String
+  like    Int       @default(0)
+  author    User?     @relation(fields: [authorId], references: [id])
+  authorId  String?
+  comments  Comment[] 
+
+  @@map("posts")
 }
 
+model Comment {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  content   String
+  author    User?      @relation(fields: [authorId], references: [id])
+  authorId  String?
+  posts      Posts     @relation(fields: [postId], references: [id])
+  postId    Int
+
+  @@map("comments")
+}
 
 model User {
   id                    String     @id @default(uuid())
@@ -35,9 +64,13 @@ model User {
   accounts              Account[]
   sessions              Session[]
   posts                 Posts[]
+  comments              Comment[]  // Remove the fields and references here
 
   @@map("users")
 }
+
+
+
 model Account {
   id                 String    @id @default(cuid())
   userId              String    @map("user_id")
