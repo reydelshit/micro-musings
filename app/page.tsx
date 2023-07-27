@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { prisma } from '@/prisma/db';
 
 export default async function Home() {
+  // console.log(posts, 'from home component');
   const posts = await prisma.posts.findMany({
     orderBy: {
       createdAt: 'desc',
@@ -31,7 +32,7 @@ export default async function Home() {
           <p>enjoy what you are seeing!</p>
         </div>
 
-        {posts &&
+        {Array.isArray(posts) &&
           posts.map((post) => {
             return (
               <div
