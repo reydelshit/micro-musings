@@ -1,5 +1,26 @@
 import { prisma } from '@/prisma/db';
 import Link from 'next/link';
+import { User } from '@prisma/client';
+import { GetStaticProps } from 'next';
+
+// type Posts = {
+//   id: number;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   published: boolean;
+//   title: string;
+//   content?: string | null;
+//   category?: string | null;
+//   author: {
+//     id: string;
+//     name: string;
+//     image: string | null;
+//   };
+// };
+
+// interface HomeProps {
+//   posts: Posts[];
+// }
 
 export default async function Home() {
   const posts = await prisma.posts.findMany({
@@ -30,7 +51,7 @@ export default async function Home() {
           <p>enjoy what you are seeing!</p>
         </div>
 
-        {posts.map((post) => {
+        {posts?.map((post) => {
           return (
             <div
               className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
