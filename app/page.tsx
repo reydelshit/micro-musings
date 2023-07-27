@@ -1,8 +1,17 @@
 import Link from 'next/link';
-import { getPosts } from '@/lib/getPosts';
+
+import { prisma } from '@/prisma/db';
 
 export default async function Home() {
-  const { posts } = await getPosts();
+  const posts = await prisma.posts.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      author: true,
+    },
+    take: 100,
+  });
 
   const formatDate = (date: Date) => {
     const dateObj = new Date(date);
