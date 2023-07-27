@@ -1,37 +1,8 @@
-import { prisma } from '@/prisma/db';
 import Link from 'next/link';
-import { User } from '@prisma/client';
-import { GetStaticProps } from 'next';
-
-// type Posts = {
-//   id: number;
-//   createdAt: Date;
-//   updatedAt: Date;
-//   published: boolean;
-//   title: string;
-//   content?: string | null;
-//   category?: string | null;
-//   author: {
-//     id: string;
-//     name: string;
-//     image: string | null;
-//   };
-// };
-
-// interface HomeProps {
-//   posts: Posts[];
-// }
+import { getPosts } from '@/lib/getPosts';
 
 export default async function Home() {
-  const posts = await prisma.posts.findMany({
-    orderBy: {
-      createdAt: 'desc',
-    },
-    include: {
-      author: true,
-    },
-    take: 100,
-  });
+  const { posts } = await getPosts();
 
   const formatDate = (date: Date) => {
     const dateObj = new Date(date);
@@ -51,36 +22,37 @@ export default async function Home() {
           <p>enjoy what you are seeing!</p>
         </div>
 
-        {posts?.map((post) => {
-          return (
-            <div
-              className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
-              key={post.id}
-            >
-              <div className="flex h-[5rem] items-center">
-                <span className="mr-2">{formatDate(post.createdAt)}</span>
-                <p>{post.category}</p>
-              </div>
-
-              <Link
-                href={`/pages/post/${post.id}`}
-                className="font-bold text-4xl"
+        {posts &&
+          posts.map((post) => {
+            return (
+              <div
+                className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
+                key={post.id}
               >
-                {post.title}
-              </Link>
-              <p className="mt-5 text-lg">{post.content?.slice(0, 200)}...</p>
+                <div className="flex h-[5rem] items-center">
+                  <span className="mr-2">{formatDate(post.createdAt)}</span>
+                  <p>{post.category}</p>
+                </div>
 
-              <div className="mt-10 flex items-center">
-                <img
-                  className="w-[5rem] rounded-full mr-2"
-                  src={post.author?.image!}
-                  alt={post.author?.image!}
-                />
-                <span className="font-bold">{post.author?.name!}</span>
+                <Link
+                  href={`/pages/post/${post.id}`}
+                  className="font-bold text-4xl"
+                >
+                  {post.title}
+                </Link>
+                <p className="mt-5 text-lg">{post.content?.slice(0, 200)}...</p>
+
+                <div className="mt-10 flex items-center">
+                  <img
+                    className="w-[5rem] rounded-full mr-2"
+                    src={post.author?.image!}
+                    alt={post.author?.image!}
+                  />
+                  <span className="font-bold">{post.author?.name!}</span>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </main>
   );
