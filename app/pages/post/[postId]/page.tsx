@@ -1,5 +1,5 @@
 import { prisma } from '@/prisma/db';
-import { InputComment } from '@/components/input-comment';
+import { InputComment } from '@/components/InputComment';
 import { Vote } from '@/components/vote';
 
 export default async function ReadMore({
@@ -25,27 +25,29 @@ export default async function ReadMore({
   };
 
   return (
-    <main className="w-full min-h-[90vh] bg-gray-100 flex justify-center items-center p-2 flex-col">
+    <main className="w-full min-h-[90vh] flex justify-center items-center p-2 flex-col">
       <div className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md">
         <div className="flex justify-between mb-2">
-          <div className="flex h-[5rem] items-center">
-            <span className="text-gray-500 text-sm">
+          <div className="flex flex-col items-start md:flex-row h-[5rem] md:items-center">
+            <span className="text-amber-700 text-sm">
               {post?.createdAt && formatDate(post?.createdAt)}
             </span>
-            <p className="ml-2 font-bold">{post?.category}</p>
+            <p className="md:ml-2 font-bold">{post?.category}</p>
           </div>
 
           <div className="flex items-center">
             <img
-              className="w-[5rem] rounded-full mr-2"
+              className="w-[3rem] md:w-[5rem] rounded-full mr-2"
               src={post?.author?.image!}
               alt={post?.author?.image!}
             />
             <span className="font-bold">{post?.author?.name!}</span>
           </div>
         </div>
-        <h1 className="font-bold text-4xl">{post?.title}</h1>
-        <p className="mt-5 text-md text-left">{post?.content}</p>
+        <h1 className="font-bold text-2xl md:text-4xl text-amber-950 hover:text-[#dfa878]">
+          {post?.title}
+        </h1>
+        <p className="mt-5 text-lg md:text-lg">{post?.content}</p>
 
         <div className="mt-5 mb-5 flex items-center">
           <Vote postId={post?.id as number} />

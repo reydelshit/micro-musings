@@ -1,10 +1,12 @@
 'use client';
 
-import { upvotePost, downvotePost } from '@/lib/addLikes-actions';
+import { upvotePost, downvotePost } from '@/lib/add-likes';
 import { useEffect, useState } from 'react';
 
-import { GetLikes } from '@/lib/getLike-actions';
-import { GetDislike } from '@/lib/getDislike-actions';
+import { GetLikes } from '@/lib/get-likes';
+import { GetDislike } from '@/lib/get-dislike';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 
 interface VoteProps {
   postId: number;
@@ -23,9 +25,6 @@ export function Vote({ postId }: VoteProps) {
         likes.length - dislikes.length || dislikes.length - likes.length;
 
       setPrevCount(currentLikes);
-
-      // console.log(likes.length, 'like');
-      // console.log(dislikes.length, 'dislike');
 
       if (currentLikes !== upvoteCount) {
         setUpvoteCount(currentLikes);
@@ -51,15 +50,23 @@ export function Vote({ postId }: VoteProps) {
         className="w-[5rem] text-orange-500 mb-2"
         onClick={() => handleUpvote(postId)}
       >
-        Ayos ah
+        <FontAwesomeIcon
+          className="fa-likes text-2xl md:text-4xl"
+          style={{ color: '#3f2305' }}
+          icon={faThumbsUp}
+        />
       </button>
-      <span>{upvoteCount}</span>
+      <span className="font-bold">{upvoteCount}</span>
 
       <button
         className="w-[5rem] text-orange-500"
         onClick={() => handleDownVotePost(postId)}
       >
-        Boo!
+        <FontAwesomeIcon
+          className="fa-likes text-2xl md:text-4xl"
+          style={{ color: '#3f2305' }}
+          icon={faThumbsDown}
+        />
       </button>
     </div>
   );

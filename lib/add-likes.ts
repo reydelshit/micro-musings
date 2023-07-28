@@ -1,7 +1,6 @@
 'use server';
 
 import { prisma } from '@/prisma/db';
-import { Posts } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth-options';

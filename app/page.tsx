@@ -4,17 +4,10 @@ import Link from 'next/link';
 
 import { prisma } from '@/prisma/db';
 import { Vote } from '@/components/vote';
-
-import { GetLikes } from '@/lib/getLike-actions';
-import { GetDislike } from '@/lib/getDislike-actions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComments } from '@fortawesome/free-solid-svg-icons';
 
 export default async function Home() {
-  // const likes = await GetLikes({ postId });
-  // const dislikes = await GetDislike({ postId });
-
-  // const currentLikes =
-  //   likes.length - dislikes.length || dislikes.length - likes.length;
-
   const posts = await prisma.posts.findMany({
     orderBy: {
       like: 'desc',
@@ -34,33 +27,33 @@ export default async function Home() {
   };
 
   return (
-    <main className="w-full h-screen bg-gray-100">
+    <main className="w-full h-full mb-[5rem]">
       <div className="w-full flex-col h-full p-5 flex items-center bg-inherit">
-        <div className="w-full lg:w-[40%] py-8 md:py-0">
-          <h1 className="text-4xl font-bold">
-            SEE WHAT MICROWERS ARE POSTING RIGHT NOW..
+        <div className="w-full lg:w-[40%] md:py-0 pr-8 my-[6rem]">
+          <h1 className="text-5xl font-bold break-words ">
+            SEE WHAT MICROWERS ARE POSTING RIGHT NOW...
           </h1>
-          <p>enjoy what you are seeing!</p>
+          <p className="mt-2">enjoy what you are seeing!</p>
         </div>
 
         {Array.isArray(posts) &&
           posts.map((post) => {
             return (
               <div
-                className="h-full lg:h-[40%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
+                className="h-full lg:h-[40%] w-full lg:w-[40%] border-2 mt-5 p-3 md:p-5 bg-[#F2EAD3] rounded-md"
                 key={post.id}
               >
                 <div className="flex justify-between mb-2">
-                  <div className="flex h-[5rem] items-center">
-                    <span className="text-gray-500 text-sm">
+                  <div className="flex flex-col items-start md:flex-row h-[5rem] md:items-center">
+                    <span className="text-amber-700 text-sm">
                       {post?.createdAt && formatDate(post?.createdAt)}
                     </span>
-                    <p className="ml-2 font-bold">{post?.category}</p>
+                    <p className="md:ml-2 font-bold">{post?.category}</p>
                   </div>
 
                   <div className="flex items-center">
                     <img
-                      className="w-[5rem] rounded-full mr-2"
+                      className="w-[3rem] md:w-[5rem] rounded-full mr-2"
                       src={post.author?.image!}
                       alt={post.author?.image!}
                     />
@@ -70,20 +63,31 @@ export default async function Home() {
 
                 <Link
                   href={`/pages/post/${post.id}`}
-                  className="font-bold text-4xl"
+                  className="font-bold text-2xl md:text-4xl text-amber-950 hover:text-[#dfa878]"
                 >
                   {post.title}
                 </Link>
-                <p className="mt-5 text-lg">{post.content?.slice(0, 200)}...</p>
+                <p className="mt-5 text-lg md:text-lg">
+                  {post.content?.slice(0, 150)}...
+                </p>
 
-                <div className="flex items-start flex-col mt-10">
-                  <div className="flex items-center w-full justify-between mt-5  gap-5">
+                <div className="flex items-start flex-col mt-8">
+                  <div className="flex items-center w-full justify-between">
                     <Vote postId={post.id} />
+
                     <Link
                       href={`/pages/post/${post.id}`}
-                      className="w-[5rem] text-orange-500"
+                      className="w-[10rem] font-bold text-[#3f2305] hover:text-[#dfa878] flex items-center "
                     >
-                      Comment
+                      <FontAwesomeIcon
+                        className="fa-comment text-2xl md:text-4xl"
+                        style={{
+                          color: '#3f2305',
+                          marginRight: 8,
+                        }}
+                        icon={faComments}
+                      />
+                      Comments
                     </Link>
                   </div>
                 </div>

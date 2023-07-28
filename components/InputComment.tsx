@@ -1,14 +1,10 @@
 'use client';
 
-import { CommentProfile } from './comment-profile';
-
+import { CommentProfile } from './CommentProfile';
 import { useEffect, useState } from 'react';
-
-import { GetCommentsForPost } from '@/lib/fetchComments';
+import { GetCommentsForPost } from '@/lib/fetch-comments';
 import { User } from '@prisma/client';
-import { prisma } from '@/prisma/db';
-
-import { addComment } from '@/lib/comment-actions';
+import { addComment } from '@/lib/add-comments';
 
 interface Comment {
   id: number;
@@ -73,7 +69,7 @@ export function InputComment({ postId }: { postId: string }) {
                     <div className="text-base/6 h-full w-[90%]">
                       <h1 className="font-bold">{co.author?.name}</h1>
 
-                      <p className="pl-2 text-sm text-left break-words text-black">
+                      <p className="text-sm text-left break-words ">
                         {co.content}
                       </p>
                       <p className="text-gray-500 self-start text-xs">
@@ -93,13 +89,14 @@ export function InputComment({ postId }: { postId: string }) {
               placeholder="your hinanaings here"
               name="content"
               type="text"
-              className="border-2 w-[85%] h-[7rem] mt-2 outline-none px-2"
+              className="border-2 w-[85%] h-[7rem] mt-2 outline-none px-2 rounded-md border-[#3f2305]"
             />
           </div>
 
           <input
+            value="submit"
             type="submit"
-            className="cursor-pointer self-end mt-2 bg-slate-900 hover:bg-orange-300 hover:text-black text-white font-bold py-2 px-4 rounded-full"
+            className="bg-[#3f2305] hover:bg-[#dfa878] hover:text-[#3f2305] font-bold h-[3rem] w-[8rem] mt-4 cursor-pointer rounded-md text-white self-end"
           />
         </form>
       </div>

@@ -4,11 +4,9 @@ import { Inter } from 'next/font/google';
 
 import { AuthProvider } from '@/components/auth-provider';
 import { SiteHeader } from '@/components/site-header';
+import { Footer } from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
-
-// export const revalidate = 2;
-export const fetchCache = 'force-no-store';
 
 export const metadata: Metadata = {
   title: 'micro-musings',
@@ -25,6 +23,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <SiteHeader />
           {children}
+          <Footer />
         </body>
       </AuthProvider>
     </html>

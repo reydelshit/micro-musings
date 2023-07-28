@@ -9,7 +9,7 @@ export function CommentProfile() {
     <>
       {session?.user && (
         <img
-          className="w-[5rem] h-[5rem] rounded-full"
+          className="w-[3rem] md:w-[5rem] rounded-full mr-2"
           src={session.user.image}
           alt="imahe"
         />

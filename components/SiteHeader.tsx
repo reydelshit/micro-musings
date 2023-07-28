@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
 export function SiteHeader() {
   const { data: session } = useSession();
@@ -11,14 +13,22 @@ export function SiteHeader() {
   const [showLogout, setShowLogout] = useState(false);
 
   return (
-    <header className="w-full flex justify-center bg-gray-100 border-2">
-      <nav className="w-full flex items-center h-[7rem] py-4 px-10 md:px-10 justify-between ">
+    <header className="w-full flex justify-center bg-inherit border-2">
+      <nav className="w-full flex items-center h-[7rem] md:py-4 px-4 md:px-10 justify-between text-xs md:text-base">
         <div className="flex justify-between font-bold">
           <Link href="/">Micro Musings</Link>
         </div>
-        <div className="relative flex justify-around w-[20rem] align-middle items-center font-bold ">
-          <Link href="/new-post" className="mr-5">
-            New Post
+        <div className="relative flex justify-around w-[10rem] md:w-[20rem] align-middle items-center font-bold ">
+          <Link href="/new-post" className="mr-5 flex items-center">
+            <FontAwesomeIcon
+              style={{
+                fontSize: 30,
+                color: '#3f2305',
+                marginRight: 8,
+              }}
+              icon={faPenToSquare}
+            />
+            new post
           </Link>
           {session?.user && (
             <img

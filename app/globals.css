@@ -3,5 +3,15 @@
 @tailwind utilities;
 
 body {
-  background-color: rgb(243 244 246);
+  background-color: #f5f5f5 !important;
+  color: #3f2305;
+  position: relative;
+}
+
+.fa-comment:hover {
+  color: #dfa878 !important;
+}
+
+.fa-likes:hover {
+  color: #dfa878 !important;
 }
