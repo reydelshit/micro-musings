@@ -43,8 +43,10 @@ export default async function Home() {
               >
                 <div className="flex justify-between mb-2">
                   <div className="flex h-[5rem] items-center">
-                    <span className="mr-2">{formatDate(post.createdAt)}</span>
-                    <p>{post.category}</p>
+                    <span className="text-gray-500 text-sm">
+                      {post?.createdAt && formatDate(post?.createdAt)}
+                    </span>
+                    <p className="ml-2 font-bold">{post?.category}</p>
                   </div>
 
                   <div className="flex items-center">

@@ -29,8 +29,10 @@ export default async function ReadMore({
       <div className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md">
         <div className="flex justify-between mb-2">
           <div className="flex h-[5rem] items-center">
-            {post?.createdAt && formatDate(post?.createdAt)}
-            <p>{post?.category}</p>
+            <span className="text-gray-500 text-sm">
+              {post?.createdAt && formatDate(post?.createdAt)}
+            </span>
+            <p className="ml-2 font-bold">{post?.category}</p>
           </div>
 
           <div className="flex items-center">
@@ -46,7 +48,7 @@ export default async function ReadMore({
         <p className="mt-5 text-md text-left">{post?.content}</p>
 
         <div className="mt-5 mb-5 flex items-center">
-          <Vote postId={post?.id} />
+          <Vote postId={post?.id as number} />
         </div>
       </div>
       <InputComment postId={params.postId} />
