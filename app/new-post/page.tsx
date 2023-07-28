@@ -40,8 +40,6 @@ export default async function Page() {
           className="flex flex-col w-full items-center mt-5"
           action={addPost}
         >
-          {/* options  */}
-
           <label className="self-start mt-3 font-bold" htmlFor="caregory">
             Category
           </label>
