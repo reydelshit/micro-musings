@@ -1,6 +1,6 @@
 import { prisma } from '@/prisma/db';
-import { InputComment } from '@/components/InputComment';
 import { Vote } from '@/components/Vote';
+import { InputComment } from '@/components/InputComment';
 
 export default async function ReadMore({
   params,

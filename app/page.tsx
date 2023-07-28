@@ -3,9 +3,9 @@
 import Link from 'next/link';
 
 import { prisma } from '@/prisma/db';
-import { Vote } from '@/components/Vote';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
+import { Vote } from '@/components/Vote';
 
 export default async function Home() {
   const posts = await prisma.posts.findMany({
