@@ -5,10 +5,19 @@ import Link from 'next/link';
 import { prisma } from '@/prisma/db';
 import { Vote } from '@/components/vote';
 
+import { GetLikes } from '@/lib/getLike-actions';
+import { GetDislike } from '@/lib/getDislike-actions';
+
 export default async function Home() {
+  // const likes = await GetLikes({ postId });
+  // const dislikes = await GetDislike({ postId });
+
+  // const currentLikes =
+  //   likes.length - dislikes.length || dislikes.length - likes.length;
+
   const posts = await prisma.posts.findMany({
     orderBy: {
-      createdAt: 'desc',
+      like: 'desc',
     },
     include: {
       author: true,

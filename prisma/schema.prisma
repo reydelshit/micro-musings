@@ -19,12 +19,21 @@ model Posts {
   title     String
   content   String?
   category  String?
-  like    Int       @default(0)
+  like      Int     @default(0)
   author    User?     @relation(fields: [authorId], references: [id])
   authorId  String?
   comments  Comment[] 
 
   @@map("posts")
+}
+
+
+model Likes {
+  id        Int      @id @default(autoincrement())
+  postId    Int      
+  userId    String
+  disLikeCounter Int @default(0)
+  createdAt DateTime @default(now())
 }
 
 
@@ -53,7 +62,7 @@ model User {
   accounts              Account[]
   sessions              Session[]
   posts                 Posts[]
-  comments              Comment[]  // Remove the fields and references here
+  comments              Comment[] 
 
   @@map("users")
 }

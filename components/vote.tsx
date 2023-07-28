@@ -1,9 +1,10 @@
 'use client';
 
-import { upvotePost, downvotePost } from '@/lib/addLikes';
+import { upvotePost, downvotePost } from '@/lib/addLikes-actions';
 import { useEffect, useState } from 'react';
 
-import { GetVotes } from '@/lib/getVotes';
+import { GetLikes } from '@/lib/getLike-actions';
+import { GetDislike } from '@/lib/getDislike-actions';
 
 interface VoteProps {
   postId: number;
@@ -15,11 +16,19 @@ export function Vote({ postId }: VoteProps) {
 
   useEffect(() => {
     async function getVotes() {
-      const votes = await GetVotes({ postId });
-      setPrevCount(votes?.like as number);
+      const likes = await GetLikes({ postId });
+      const dislikes = await GetDislike({ postId });
 
-      if (votes?.like !== upvoteCount) {
-        setUpvoteCount(votes?.like as number);
+      const currentLikes =
+        likes.length - dislikes.length || dislikes.length - likes.length;
+
+      setPrevCount(currentLikes);
+
+      // console.log(likes.length, 'like');
+      // console.log(dislikes.length, 'dislike');
+
+      if (currentLikes !== upvoteCount) {
+        setUpvoteCount(currentLikes);
       }
     }
 
