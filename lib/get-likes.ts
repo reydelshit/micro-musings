@@ -10,12 +10,19 @@ export async function GetLikes({ postId }: { postId: number | undefined }) {
     },
   });
 
+  const dislikes = await prisma.likes.findMany({
+    where: {
+      postId: postId,
+      disLikeCounter: 1,
+    },
+  });
+
   await prisma.posts.update({
     where: {
       id: postId,
     },
     data: {
-      like: likes.length,
+      like: likes.length - dislikes.length || dislikes.length - likes.length,
     },
   });
 
