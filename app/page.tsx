@@ -66,7 +66,7 @@ export default async function Home() {
                 <p className="mt-5 text-lg">{post.content?.slice(0, 200)}...</p>
 
                 <div className="flex items-start flex-col mt-10">
-                  <div className="flex items-center mt-5  gap-5">
+                  <div className="flex items-center w-full justify-between mt-5  gap-5">
                     <Vote postId={post.id} />
                     <Link
                       href={`/pages/post/${post.id}`}

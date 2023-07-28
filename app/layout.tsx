@@ -7,6 +7,9 @@ import { SiteHeader } from '@/components/site-header';
 
 const inter = Inter({ subsets: ['latin'] });
 
+// export const revalidate = 2;
+export const fetchCache = 'force-no-store';
+
 export const metadata: Metadata = {
   title: 'micro-musings',
 };
