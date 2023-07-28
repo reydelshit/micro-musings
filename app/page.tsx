@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { prisma } from '@/prisma/db';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
-import { Votes } from '@/components/Vote';
+import { Vote } from '@/components/Vote';
 
 export default async function Home() {
   const posts = await prisma.posts.findMany({
@@ -73,7 +73,7 @@ export default async function Home() {
 
                 <div className="flex items-start flex-col mt-8">
                   <div className="flex items-center w-full justify-between">
-                    <Votes postId={post.id} />
+                    <Vote postId={post.id} />
 
                     <Link
                       href={`/pages/post/${post.id}`}

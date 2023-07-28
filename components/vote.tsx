@@ -12,7 +12,7 @@ interface VoteProps {
   postId: number;
 }
 
-export function Votes({ postId }: VoteProps) {
+export function Vote({ postId }: VoteProps) {
   const [upvoteCount, setUpvoteCount] = useState(0);
   const [prevCount, setPrevCount] = useState(0);
 
