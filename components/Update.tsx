@@ -27,7 +27,7 @@ export function UpdateModal({
     }
 
     getPostData();
-  }, []);
+  }, [updateId]);
 
   const updatePost = async () => {
     UpdatePost({ updateId, category, title, content });

@@ -30,15 +30,6 @@ export default function ProfilePage({
 }: {
   params: { profileId: string };
 }) {
-  // const postByUser = await prisma.posts.findMany({
-  //   where: {
-  //     authorId: params.profileId,
-  //   },
-  //   include: {
-  //     author: true,
-  //   },
-  // });
-
   const [postByUser, setPostByUser] = useState<Post[]>([]);
   const [updateModal, setShowUpdateModal] = useState(false);
   const [updateId, setUpdateId] = useState<number | null>(null);
