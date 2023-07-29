@@ -2,7 +2,7 @@
 
 import { prisma } from '@/prisma/db';
 import { Vote } from '@/components/Vote';
-import { InputComment } from '@/components/InputComment';
+import { CommentContainer } from '@/components/CommentContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 
@@ -43,7 +43,7 @@ export default function ProfilePage({
     }
 
     getPosts();
-  }, [postByUser]);
+  }, [params.profileId]);
 
   const formatDate = (date: Date) => {
     const dateObj = new Date(date);
@@ -65,7 +65,10 @@ export default function ProfilePage({
   return (
     <main className="relative w-full min-h-[90vh] flex justify-center items-center p-2 flex-col">
       {postByUser.map((post) => (
-        <div className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md">
+        <div
+          key={post.id}
+          className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md"
+        >
           <div className="flex justify-between mb-2">
             <div className="flex flex-col items-start md:flex-row h-[5rem] md:items-center">
               <span className="text-amber-700 text-sm">
@@ -99,7 +102,7 @@ export default function ProfilePage({
             <Vote postId={post?.id as number} />
           </div>
 
-          <InputComment postId={post.id} />
+          <CommentContainer postId={post.id} />
 
           {updateModal && updateId === post.id && (
             <UpdateModal

@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { GetCommentsForPost } from '@/lib/fetch-comments';
 import { User } from '@prisma/client';
 import { addComment } from '@/lib/add-comments';
+import Image from 'next/image';
 
 interface Comment {
   id: number;
@@ -16,7 +17,7 @@ interface Comment {
   postId: number;
 }
 
-export function InputComment({ postId }: { postId: number }) {
+export function CommentContainer({ postId }: { postId: number }) {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
@@ -60,10 +61,10 @@ export function InputComment({ postId }: { postId: number }) {
                   key={co.id}
                 >
                   <div className="flex w-full h-full ">
-                    <img
+                    <Image
                       className="rounded-full w-[3rem] h-[3rem] mr-2"
                       src={co.author?.image!}
-                      alt={co.author?.name}
+                      alt={co.author?.name!}
                     />
 
                     <div className="text-base/6 h-full w-[90%]">

@@ -1,6 +1,7 @@
 import { prisma } from '@/prisma/db';
 import { Vote } from '@/components/Vote';
-import { InputComment } from '@/components/InputComment';
+import { CommentContainer } from '@/components/CommentContainer';
+import Image from 'next/image';
 
 export default async function ReadMore({
   params,
@@ -36,7 +37,7 @@ export default async function ReadMore({
           </div>
 
           <div className="flex items-center">
-            <img
+            <Image
               className="w-[3rem] md:w-[5rem] rounded-full mr-2"
               src={post?.author?.image!}
               alt={post?.author?.image!}
@@ -55,7 +56,7 @@ export default async function ReadMore({
       </div>
 
       <div className="w-full lg:w-[40%]">
-        <InputComment postId={params.postId} />
+        <CommentContainer postId={params.postId} />
       </div>
     </main>
   );

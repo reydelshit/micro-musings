@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 export function SiteHeader() {
   const { data: session } = useSession();
@@ -31,7 +32,7 @@ export function SiteHeader() {
             new post
           </Link>
           {session?.user && (
-            <img
+            <Image
               onClick={() => setShowMenu(!showMenu)}
               className="w-[5rem] rounded-full cursor-pointer"
               src={session.user.image}
