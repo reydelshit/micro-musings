@@ -61,7 +61,7 @@ export function CommentContainer({ postId }: { postId: number }) {
                   key={co.id}
                 >
                   <div className="flex w-full h-full ">
-                    <Image
+                    <img
                       className="rounded-full w-[3rem] h-[3rem] mr-2"
                       src={co.author?.image!}
                       alt={co.author?.name!}
