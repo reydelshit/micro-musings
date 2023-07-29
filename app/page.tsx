@@ -57,7 +57,9 @@ export default async function Home() {
                       src={post.author?.image!}
                       alt={post.author?.image!}
                     />
-                    <span className="font-bold">{post.author?.name!}</span>
+                    <Link href={`/id/${post.author?.id}`} className="font-bold">
+                      {post.author?.name!}
+                    </Link>
                   </div>
                 </div>
 
