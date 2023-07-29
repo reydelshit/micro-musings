@@ -40,7 +40,7 @@ export function SiteHeader() {
           )}
 
           {showMenu && (
-            <div className="flex items-center flex-col justify-center absolute bottom-[-6rem] right-6 bg-white w-[8rem] border-2 h-full">
+            <div className="flex items-center flex-col justify-center absolute z-20 bottom-[-6rem] right-6 bg-white w-[8rem] border-2 h-full">
               <Link href={`/profile/id/${session?.user.id}`}>Profile</Link>
               <span>{session && <SignOut />}</span>
             </div>
