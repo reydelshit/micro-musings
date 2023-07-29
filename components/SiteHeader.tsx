@@ -10,7 +10,7 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 export function SiteHeader() {
   const { data: session } = useSession();
 
-  const [showLogout, setShowLogout] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
   return (
     <header className="w-full flex justify-center bg-inherit border-2">
@@ -32,15 +32,16 @@ export function SiteHeader() {
           </Link>
           {session?.user && (
             <img
-              onClick={() => setShowLogout(!showLogout)}
-              className="w-[5rem] rounded-full"
+              onClick={() => setShowMenu(!showMenu)}
+              className="w-[5rem] rounded-full cursor-pointer"
               src={session.user.image}
               alt="imahe"
             />
           )}
 
-          {showLogout && (
-            <div className="flex items-center justify-center absolute bottom-[-6rem] right-6 bg-white w-[8rem] border-2 h-full">
+          {showMenu && (
+            <div className="flex items-center flex-col justify-center absolute bottom-[-6rem] right-6 bg-white w-[8rem] border-2 h-full">
+              <Link href={`/profile/id/${session?.user.id}`}>Profile</Link>
               <span>{session && <SignOut />}</span>
             </div>
           )}

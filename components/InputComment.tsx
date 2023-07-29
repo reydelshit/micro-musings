@@ -16,7 +16,7 @@ interface Comment {
   postId: number;
 }
 
-export function InputComment({ postId }: { postId: string }) {
+export function InputComment({ postId }: { postId: number }) {
   const [comments, setComments] = useState<Comment[]>([]);
 
   useEffect(() => {
@@ -48,11 +48,11 @@ export function InputComment({ postId }: { postId: string }) {
   };
 
   return (
-    <div className="h-full lg:h-[50%] w-full lg:w-[40%] border-2 mt-5 p-5 bg-white rounded-md">
-      <div className="flex flex-col">
-        <div className="h-full ">
+    <div className="h-full lg:h-[50%] w-full lg:w-[100%] border-2 mt-5 p-5 bg-white rounded-md">
+      <div className="flex flex-col w-full">
+        <div className="h-full w-full">
           {comments
-            .filter((co) => co.postId === parseInt(postId))
+            .filter((co) => co.postId === Number(postId))
             .map((co) => {
               return (
                 <div
@@ -82,7 +82,7 @@ export function InputComment({ postId }: { postId: string }) {
             })}
         </div>
 
-        <form className="flex flex-col" action={handleSubmit}>
+        <form className="flex flex-col w-full" action={handleSubmit}>
           <div className="flex justify-between items-center">
             <CommentProfile />
             <input

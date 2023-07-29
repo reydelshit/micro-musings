@@ -74,7 +74,6 @@ export default async function Home() {
                 <div className="flex items-start flex-col mt-8">
                   <div className="flex items-center w-full justify-between">
                     <Vote postId={post.id} />
-
                     <Link
                       href={`/pages/post/${post.id}`}
                       className="w-[10rem] font-bold text-[#3f2305] hover:text-[#dfa878] flex items-center "

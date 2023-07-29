@@ -5,7 +5,7 @@ import { InputComment } from '@/components/InputComment';
 export default async function ReadMore({
   params,
 }: {
-  params: { postId: string };
+  params: { postId: number };
 }) {
   const post = await prisma.posts.findUnique({
     where: {
@@ -53,7 +53,10 @@ export default async function ReadMore({
           <Vote postId={post?.id as number} />
         </div>
       </div>
-      <InputComment postId={params.postId} />
+
+      <div className="w-full lg:w-[40%]">
+        <InputComment postId={params.postId} />
+      </div>
     </main>
   );
 }
