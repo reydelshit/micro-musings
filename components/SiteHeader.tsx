@@ -32,10 +32,10 @@ export function SiteHeader() {
             new post
           </Link>
           {session?.user && (
-            <Image
+            <img
               onClick={() => setShowMenu(!showMenu)}
               className="w-[5rem] rounded-full cursor-pointer"
-              src={session.user.image}
+              src={session?.user.image}
               alt="imahe"
             />
           )}
